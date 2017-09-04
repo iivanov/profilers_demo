@@ -1,0 +1,6 @@
+version: "3.1"
+services:
+
+    php-fpm:
+      volumes:
+        - ./phpdocker/php-fpm/20-xdebug-enable.ini:/etc/php/7.1/fpm/conf.d/20-xdebug.ini

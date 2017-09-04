@@ -12,9 +12,11 @@ require __DIR__.'/../src/controllers.php';
 $app->run();
 
 
-//finalize xhprof
+
+$file_path = sys_get_temp_dir() . "/{$app['xhprof.trace_name']}.{$app['xhprof.source']}.xhprof";
+
 $data = tideways_disable();
 file_put_contents(
-    sys_get_temp_dir() . "/" . uniqid() . ".yourapp.xhprof",
+    $file_path,
     serialize($data)
 );

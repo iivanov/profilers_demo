@@ -8,9 +8,16 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 //Request::setTrustedProxies(array('127.0.0.1'));
 
+$app['profiler_example.controller'] = function() use ($app) {
+    return new Controller\ProfilerExample($app['xhprof.href'] ?? '');
+};
+
+$app->get('/recursive_method/', "profiler_example.controller:recursiveMethodExample");
+$app->get('/indirect_recursion_method/', "profiler_example.controller:indirectRecursionMethod");
+$app->get('/long_method/', "profiler_example.controller:longMethodExample");
+
 $app->get('/', function () use ($app) {
-    return phpinfo();
-//    return $app['twig']->render('index.html.twig', array());
+    return $app['twig']->render('index.html.twig', array());
 })
 ->bind('homepage')
 ;
