@@ -1,0 +1,5 @@
+/src/vendor
+/db
+/redis_db
+/src/logs/*
+/src/cache/*
