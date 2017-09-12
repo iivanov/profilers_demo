@@ -42,3 +42,18 @@ https://docs.docker.com/compose/install/#install-compose
 Результаты профилирования будут доступны в папке проекта `/profiles/tmp/` результаты xdebug в названии файла содержат `cachegrind`
 Просмотреть их можно с помощью просмотрщиков cachegrind, часть из них можно увидеть в статье https://habrahabr.ru/post/75166/ 
 или же можно воспользоваться встроенным в PHPStorm, меню `Tools/Analize Xdebug Profiler Snapshot...`
+
+
+# Настройка NewRelic
+
+Необходимо зарегистрировать аккаунт на https://rpm.newrelic.com/
+Необходимо ввести параметры аккаунта newrelic для виртуалки выполнив
+`docker-compose exec php-fpm newrelic-install`
+сам ключ можно посмотреть в https://rpm.newrelic.com/accounts/1738496/applications/setup# раздел `Get your license key`
+предварительно нужно выбрать php, затем нажимаем на кнопочку `Reveal license key`
+
+Копируем конфиг
+`docker-compose exec php-fpm cp /etc/newrelic/newrelic.cfg.template /etc/newrelic/newrelic.cfg`
+
+После установки может понадобиться перезапуск агента:
+`docker-compose exec php-fpm /etc/init.d/newrelic-daemon restart`
